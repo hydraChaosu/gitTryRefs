@@ -1,0 +1,54 @@
+body {
+  background-color: aqua;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.app {
+  margin: 10vh 20vh;
+}
+.app form {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  text-align: center;
+  background-color: green;
+}
+/* form * {
+  line-height: 10vh;
+} */
+
+form label,
+p {
+  flex-basis: 40px;
+  line-height: 40px;
+}
+
+form input {
+  padding: 20px 40px;
+}
+
+form input[type="button"],
+button {
+  /* width: 100px; */
+  margin: 20px auto;
+  padding: 20px 40px;
+}
+
+.error {
+  color: red;
+}
+
+.pass {
+  color: green;
+}
