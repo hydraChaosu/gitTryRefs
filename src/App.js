@@ -1,6 +1,35 @@
 import React, { Component } from "react";
 import "./App.css";
 
+const MyInput = props => {
+  return <input type="text" ref={props.inputRef} />;
+};
+
+const FuncCustomComp = () => {
+  // refencje w sfc trzeba inicjalizować 1
+  let inputRef = null;
+  const onClick = () => {
+    inputRef.focus();
+  };
+  return (
+    <>
+      <div>
+        <span>My test sfc input:</span>
+        {/* //1 */}
+        {/* <input type="text" ref={element => {
+            inputRef = element;
+          }} /> */}
+        <MyInput
+          inputRef={element => {
+            inputRef = element;
+          }}
+        />
+        <input type="submit" value="submit" onClick={onClick} />
+      </div>
+    </>
+  );
+};
+
 class App extends Component {
   state = {
     errors: {}
@@ -31,6 +60,7 @@ class App extends Component {
     console.log(this.textInput.value);
     console.log(this.refs.age.value);
     console.log(this.petName.value);
+    console.log(this.passed);
     const name = this.nameInput.current.value;
     const from = this.textInput.value;
     const old = this.refs.age.value;
@@ -42,6 +72,7 @@ class App extends Component {
       this.textInput.value = "";
       this.refs.age.value = "";
       this.petName.value = "";
+      // window.scrollTo(0, this.passed.current.offsetTop);
     }
     this.setState({
       errors: errors
@@ -152,8 +183,15 @@ class App extends Component {
             onClick={this.focusTextInput}
           />
           <button>Submit</button>
+          <div
+            ref={element => {
+              this.passed = element;
+            }}
+          >
+            {pass && <p className="pass">{pass}</p>}
+            <FuncCustomComp />
+          </div>
         </form>
-        {pass && <p className="pass">{pass}</p>}
       </div>
     );
   }

@@ -17,7 +17,7 @@ code {
   margin: 10px 20px;
 }
 .app form {
-  height: 80vh;
+  /* height: 80vh; */
   display: flex;
   flex-direction: column;
   /* justify-content: space-evenly; */
@@ -51,5 +51,19 @@ button {
 }
 
 .pass {
+  text-align: center;
   color: green;
+  font-weight: bold;
+}
+
+@media (min-width: 800px) {
+  .app {
+    margin: 10vh 20vw;
+  }
+}
+
+@media (min-width: 1400px) {
+  .app {
+    margin: 10vh 25vw;
+  }
 }
