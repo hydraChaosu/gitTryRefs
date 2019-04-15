@@ -14,7 +14,7 @@ code {
     monospace;
 }
 .app {
-  margin: 10vh 20vh;
+  margin: 10px 20px;
 }
 .app form {
   height: 80vh;
@@ -22,7 +22,7 @@ code {
   flex-direction: column;
   /* justify-content: space-evenly; */
   text-align: center;
-  background-color: green;
+  /* background-color: green; */
 }
 /* form * {
   line-height: 10vh;
@@ -41,12 +41,13 @@ form input {
 form input[type="button"],
 button {
   /* width: 100px; */
-  margin: 20px auto;
+  margin: 10px 0;
   padding: 20px 40px;
 }
 
 .error {
   color: red;
+  font-weight: bold;
 }
 
 .pass {

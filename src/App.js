@@ -9,6 +9,7 @@ class App extends Component {
   // myRef = React.createRef();
   textInput = React.createRef();
   nameInput = React.createRef();
+  // ageInput = React.createRef()
 
   focusTextInput = () => {
     // Explicitly focus the text input using the raw DOM API
@@ -28,18 +29,26 @@ class App extends Component {
     e.preventDefault();
     console.log(this.nameInput.current.value);
     console.log(this.textInput.value);
-    console.log(this.refs.cat.value);
+    console.log(this.refs.age.value);
+    console.log(this.petName.value);
     const name = this.nameInput.current.value;
     const from = this.textInput.value;
-    const old = this.refs.cat.value;
-    const errors = this.checkErrors(name, from, old);
-    // console.log(errors);
+    const old = this.refs.age.value;
+    const pet = this.petName.value;
+    const errors = this.checkErrors(name, from, old, pet);
+    console.log(errors);
+    if (errors.pass === "you passed") {
+      this.nameInput.current.value = "";
+      this.textInput.value = "";
+      this.refs.age.value = "";
+      this.petName.value = "";
+    }
     this.setState({
       errors: errors
     });
   };
 
-  checkErrors = (name, from, old) => {
+  checkErrors = (name, from, old, pet) => {
     const errors = {};
     if (name.length === 0) {
       errors.name = "write your name";
@@ -50,7 +59,11 @@ class App extends Component {
     }
 
     if (old.length === 0) {
-      errors["old"] = "wpisz swoj wiek";
+      errors["old"] = "write your age";
+    }
+
+    if (pet.length === 0) {
+      errors.pet = "write your pet name, if you have'nt have one the write no";
     }
 
     if (old < 18) {
@@ -66,21 +79,68 @@ class App extends Component {
     }
   };
 
+  onKeyUP = (target, e) => {
+    if (e.keyCode === 13) {
+      switch (target) {
+        case "nameInput":
+          this.textInput.focus();
+          break;
+        case "textInput":
+          this.refs.age.focus();
+          break;
+        case "ageInput":
+          this.petName.focus();
+          break;
+        case "petInput":
+          this.nameInput.current.focus();
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   render() {
-    const { name, from, old, age, pass } = this.state.errors;
+    const { name, from, old, age, pet, pass } = this.state.errors;
     return (
       <div className="app">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Write your name</label>
           {name && <p className="error">{name}</p>}
-          <input type="text" ref={this.nameInput} name="name" />
+          <input
+            type="text"
+            ref={this.nameInput}
+            name="name"
+            onKeyUp={this.onKeyUP.bind(this, "nameInput")}
+          />
           <label htmlFor="from">Where are you from</label>
           {from && <p className="error">{from}</p>}
-          <input name="from" type="text" ref={this.setTextInputRef} />
+          <input
+            name="from"
+            type="text"
+            ref={this.setTextInputRef}
+            onKeyUp={this.onKeyUP.bind(this, "textInput")}
+          />
           <label htmlFor="oldref">How old are you</label>
           {age && <p className="error">{age}</p>}
           {old && <p className="error">{old}</p>}
-          <input type="text" ref="cat" name="oldref" />
+          <input
+            type="text"
+            ref="age"
+            name="oldref"
+            onKeyUp={this.onKeyUP.bind(this, "ageInput")}
+          />
+          <label htmlFor="pet">What is your's first pet name?</label>
+          {pet && <p className="error">{pet}</p>}
+
+          <input
+            type="text"
+            ref={petInput => {
+              this.petName = petInput;
+            }}
+            name="pet"
+            onKeyUp={this.onKeyUP.bind(this, "petInput")}
+          />
           <input
             type="button"
             value="Focus the name input"
